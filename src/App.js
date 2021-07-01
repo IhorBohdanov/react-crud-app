@@ -1,11 +1,12 @@
 import { Layout, Menu } from 'antd';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import About from './About';
+import Home from './views/pages/Home';
+import Albums from './views/pages/Albums';
+import CreateAlbum from './views/pages/CreateAlbum';
+import Page404 from './views/pages/Page404';
+
 import { BrowserRouter as Router, Route, Switch , Link} from 'react-router-dom';
 
 const { Header, Content, Footer, Sider } = Layout;
-
-
 
 function App() {
   return (
@@ -14,21 +15,21 @@ function App() {
         <Router>
           <Sider>
             <div className="logo" />
-            <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-              <Menu.Item key="1" icon={<UserOutlined />}>
-                <Link to="/about">
-                nav 1
+            <Menu theme="dark" mode="inline">
+              <Menu.Item key="1">
+                <Link to="/home">
+                  Home
                 </Link>
-                
               </Menu.Item>
-              <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                nav 2
+              <Menu.Item key="2">
+                <Link to="/albums">
+                  Albums
+                </Link>
               </Menu.Item>
-              <Menu.Item key="3" icon={<UploadOutlined />}>
-                nav 3
-              </Menu.Item>
-              <Menu.Item key="4" icon={<UserOutlined />}>
-                nav 4
+              <Menu.Item key="3">
+                <Link to="/create-album">
+                  Create album
+                </Link>
               </Menu.Item>
             </Menu>
           </Sider>
@@ -38,8 +39,17 @@ function App() {
               <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                 
                   <Switch>
-                    <Route path="/about">
-                      <About />
+                    <Route path="/home" exact>
+                      <Home />
+                    </Route>
+                    <Route path="/albums" exact>
+                      <Albums />
+                    </Route>
+                    <Route path="/create-album" exsact>
+                      <CreateAlbum />
+                    </Route>
+                    <Route path="*">
+                      <Page404 />
                     </Route>
                   </Switch>
                 
