@@ -8,36 +8,60 @@ import Page404 from './views/pages/Page404';
 import api from './api';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch , Link} from 'react-router-dom';
-import Item from 'antd/lib/list/Item';
-import { message, Button } from 'antd';
+import { message } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const getAlbums = async () => {
-  const res = await api.get()
-  return res
+  try {
+    const res = await api.get()
+    return res
+  } catch(error) {
+    message.error({
+      content: 'Fail to fetch albums'
+    })
+    throw error
+  }
 }
 
 const createAlbum = async (payload) => {
-  console.log(payload)
+  try {
+    console.log(payload)
+    const res = await api.post()
+    return res
+  } catch(error) {
+    message.error({
+      content: 'Fail to create album'
+    })
+    throw error
+  }
 }
 
 const deleteAlbum = async (id) => {
   try {
-    const res = await api.delete(`${id}`)
-    return
+    const res = await api.delete(`${'asdasdasd'}`)
+    return res
   } catch(error) {
+    message.error({
+      content: 'Fail to delete album'
+    })
     throw error
   }
 }
 
 const editAlbum = async (payload) => {
-  console.log(payload)
+  try {
+    const res = await api.patch(`${'asdasdasd'}`)
+    return res
+  } catch(error) {
+    message.error({
+      content: 'Fail to edit album'
+    })
+    throw error
+  }
 }
 
 function App() {
-
-
   let [albums, setAlbums] = useState([]);
 
   useEffect(() => {
