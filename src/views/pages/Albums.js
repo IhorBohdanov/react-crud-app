@@ -21,9 +21,11 @@ export default function Albums(props) {
                     title={<Link to={`/albums/${item.id}`}>{item.title}</Link>}
                   />
                   <div>
-                    <Button type="link" onClick={() => props.handleEdit(item.id)}>
-                      Delete
-                    </Button>
+                    <Link to={`/edit-album/${item.id}`}>
+                      <Button type="link">
+                        Edit
+                      </Button>
+                    </Link>
                     <Button type="primary" danger onClick={() => props.handleDelete(item.id)}>
                       Delete
                     </Button>

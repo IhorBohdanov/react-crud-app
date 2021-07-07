@@ -1,26 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import api from "../../api";
 import { Form, Input, Button, InputNumber } from "antd";
 
-function CreateAlbum(props) {
+
+function EditAlbum(props) {
+  const { id } = useParams();
   let [title, setTitle] = useState("");
   let [userId, setUserId] = useState(null);
 
+  useEffect(() => {
+    const getAlbum = async () => {
+      const res = await api.get(`${id}`);
+      console.log(res);
+      setTitle(res.data.title);
+      setUserId(res.data.userId);
+    };
+
+    getAlbum();
+  }, []);
+
   const handleSubmit = () => {
-    props.handleCreate({
+    props.handleEdit({
+      id,
       title,
       userId
     })
-  }
+  } 
 
   return (
     <div>
-      <h2>Create Album</h2>
+      <h2>Edit Album</h2>
       <Form
         name="basic"
         wrapperCol={{ span: 16 }}
         layout="vertical"
         onFinish={handleSubmit}
       >
+        <Form.Item
+          label="Id"
+        >
+          <InputNumber value={id} disabled/>
+        </Form.Item>
 
         <Form.Item
           label="Title"
@@ -42,5 +63,5 @@ function CreateAlbum(props) {
     </div>
   );
 }
-  
-  export default CreateAlbum;
+
+export default EditAlbum;

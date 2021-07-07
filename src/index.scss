@@ -11,3 +11,10 @@
 .site-layout-background {
   background: #fff;
 }
+
+#root, .App, .site-layout-background{
+  height: 100%;
+}
+.App > .ant-layout {
+  min-height: 100%;
+}

@@ -2,6 +2,7 @@ import { Layout, Menu } from 'antd';
 import Home from './views/pages/Home';
 import Albums from './views/pages/Albums';
 import CreateAlbum from './views/pages/CreateAlbum';
+import EditAlbum from './views/pages/EditAlbum';
 import SingleAlbum from './views/pages/SingleAlbum';
 import Page404 from './views/pages/Page404';
 import api from './api';
@@ -17,6 +18,10 @@ const getAlbums = async () => {
   return res
 }
 
+const createAlbum = async (payload) => {
+  console.log(payload)
+}
+
 const deleteAlbum = async (id) => {
   try {
     const res = await api.delete(`${id}`)
@@ -24,6 +29,10 @@ const deleteAlbum = async (id) => {
   } catch(error) {
     throw error
   }
+}
+
+const editAlbum = async (payload) => {
+  console.log(payload)
 }
 
 function App() {
@@ -87,6 +96,9 @@ function App() {
             <Content style={{ margin: '24px 16px 0' }}>
               <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                 <Switch>
+                  <Route path="/" exact>
+                    <Home />
+                  </Route>
                   <Route path="/home" exact>
                     <Home />
                   </Route>
@@ -97,7 +109,10 @@ function App() {
                     <SingleAlbum />
                   </Route>
                   <Route path="/create-album" exsact>
-                    <CreateAlbum />
+                    <CreateAlbum handleCreate={editAlbum}/>
+                  </Route>
+                  <Route path="/edit-album/:id" exsact>
+                    <EditAlbum handleEdit={createAlbum}/>
                   </Route>
                   <Route path="*">
                     <Page404 />
