@@ -1,24 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import api from "../../api";
 import { Form, Input, Button, InputNumber } from "antd";
+import { useFetchAlbum } from '../../hooks';
+import EditForm from '../components/EditForm';
 
 
 function EditAlbum(props) {
   const { id } = useParams();
-  let [title, setTitle] = useState("");
-  let [userId, setUserId] = useState(null);
-
-  useEffect(() => {
-    const getAlbum = async () => {
-      const res = await api.get(`${id}`);
-      console.log(res);
-      setTitle(res.data.title);
-      setUserId(res.data.userId);
-    };
-
-    getAlbum();
-  }, []);
+  let  { title, userId, setTitle, setUserId } = useFetchAlbum(id);
 
   const handleSubmit = () => {
     props.handleEdit({
@@ -31,7 +20,8 @@ function EditAlbum(props) {
   return (
     <div>
       <h2>Edit Album</h2>
-      <Form
+      <EditForm album={{title, userId, id}}/>
+      {/* <Form
         name="basic"
         wrapperCol={{ span: 16 }}
         layout="vertical"
@@ -59,7 +49,7 @@ function EditAlbum(props) {
             Submit
           </Button>
         </Form.Item>
-      </Form>
+      </Form> */}
     </div>
   );
 }

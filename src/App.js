@@ -1,77 +1,32 @@
-import { Layout, Menu } from 'antd';
 import Home from './views/pages/Home';
 import Albums from './views/pages/Albums';
 import CreateAlbum from './views/pages/CreateAlbum';
 import EditAlbum from './views/pages/EditAlbum';
 import SingleAlbum from './views/pages/SingleAlbum';
 import Page404 from './views/pages/Page404';
-import api from './api';
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch , Link} from 'react-router-dom';
+import { deleteAlbum, createAlbum, updateAlbum } from './api';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import { message } from 'antd';
+import { useFetchAlbums } from './hooks';
+import AppLayout from './views/components/AppLayout'
 
-const { Header, Content, Footer, Sider } = Layout;
-
-const getAlbums = async () => {
-  try {
-    const res = await api.get()
-    return res
-  } catch(error) {
-    message.error({
-      content: 'Fail to fetch albums'
-    })
-    throw error
-  }
-}
-
-const createAlbum = async (payload) => {
-  try {
-    console.log(payload)
-    const res = await api.post()
-    return res
-  } catch(error) {
-    message.error({
-      content: 'Fail to create album'
-    })
-    throw error
-  }
-}
-
-const deleteAlbum = async (id) => {
-  try {
-    const res = await api.delete(`${'asdasdasd'}`)
-    return res
-  } catch(error) {
-    message.error({
-      content: 'Fail to delete album'
-    })
-    throw error
-  }
-}
-
-const editAlbum = async (payload) => {
-  try {
-    const res = await api.patch(`${'asdasdasd'}`)
-    return res
-  } catch(error) {
-    message.error({
-      content: 'Fail to edit album'
-    })
-    throw error
-  }
-}
 
 function App() {
-  let [albums, setAlbums] = useState([]);
+  let [albums, setAlbums] = useFetchAlbums()
 
-  useEffect(() => {
-    const loadAlbums = async () => {
-      let res = await getAlbums()
-      setAlbums(res.data)
+  const handleCreate = async (payload) => {
+    try {
+      const res = await createAlbum(payload)
+      setAlbums([...albums, res.data])
+      message.success({
+        content: 'Album successfuly created'
+      })
+    } catch (error) {
+      message.error({
+        content: 'Fail to create album'
+      })
     }
-    
-    loadAlbums()
-  },[])
+  }
 
   const handleDelete = async (id) => {
     try {
@@ -80,74 +35,59 @@ function App() {
       message.success({
         content: 'Album successfuly deleted'
       })
-    } catch(error) {
+    } catch (error) {
       message.error({
         content: 'Fail to delete album'
       })
     }
   }
 
-  const handleEdit = (id) => {
-    console.log('id', id)
+  const handleEdit = async (payload) => {
+    try {
+      const res = await updateAlbum(payload)
+      const index = albums.findIndex(
+        album => album.id === res.data.id
+      );
+      let albumArr = [...albums]
+      albumArr.splice(index, 1, res.data)
+      setAlbums(albumArr)
+      message.success({
+        content: 'Album successfuly edited'
+      })
+    } catch (error) {
+      message.error({
+        content: 'Fail to delete album'
+      })
+    }
   }
 
   return (
     <div className="App">
-      <Layout>
-        <Router>
-          <Sider>
-            <div className="logo" />
-            <Menu theme="dark" mode="inline">
-              <Menu.Item key="1">
-                <Link to="/home">
-                  Home
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Link to="/albums">
-                  Albums
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Link to="/create-album">
-                  Create album
-                </Link>
-              </Menu.Item>
-            </Menu>
-          </Sider>
-          <Layout>
-            <Header className="site-layout-sub-header-background" style={{ padding: 0 }} />
-            <Content style={{ margin: '24px 16px 0' }}>
-              <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                <Switch>
-                  <Route path="/" exact>
-                    <Home />
-                  </Route>
-                  <Route path="/home" exact>
-                    <Home />
-                  </Route>
-                  <Route path="/albums" exact>
-                    <Albums albums={albums} handleDelete={handleDelete} handleEdit={handleEdit}/>
-                  </Route>
-                  <Route path="/albums/:id" exact>
-                    <SingleAlbum />
-                  </Route>
-                  <Route path="/create-album" exsact>
-                    <CreateAlbum handleCreate={editAlbum}/>
-                  </Route>
-                  <Route path="/edit-album/:id" exsact>
-                    <EditAlbum handleEdit={createAlbum}/>
-                  </Route>
-                  <Route path="*">
-                    <Page404 />
-                  </Route>
-                </Switch>
-              </div>
-            </Content>
-            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-          </Layout>
-        </Router>
-      </Layout>
+      <AppLayout>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/home" exact>
+            <Home />
+          </Route>
+          <Route path="/albums" exact>
+            <Albums albums={albums} handleDelete={handleDelete} />
+          </Route>
+          <Route path="/albums/:id" exact>
+            <SingleAlbum />
+          </Route>
+          <Route path="/create-album" exsact>
+            <CreateAlbum handleCreate={handleCreate} />
+          </Route>
+          <Route path="/edit-album/:id" exsact>
+            <EditAlbum handleEdit={handleEdit} />
+          </Route>
+          <Route path="*">
+            <Page404 />
+          </Route>
+        </Switch>
+      </AppLayout>
     </div>
   );
 }
