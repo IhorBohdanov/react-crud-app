@@ -9,7 +9,7 @@ import { Route, Switch } from 'react-router-dom';
 import { message } from 'antd';
 import { useFetchAlbums } from './hooks';
 import AppLayout from './views/components/AppLayout';
-import history from './history';
+
 
 function App() {
   let [albums, setAlbums] = useFetchAlbums();
@@ -21,7 +21,7 @@ function App() {
       message.success({
         content: 'Album successfuly created'
       })
-      history.push('/albums')
+      return true
     } catch (error) {
       message.error({
         content: 'Fail to create album'
@@ -55,7 +55,7 @@ function App() {
       message.success({
         content: 'Album successfuly edited'
       })
-      history.push('/albums')
+      return true
     } catch (error) {
       message.error({
         content: 'Fail to delete album'
@@ -68,9 +68,6 @@ function App() {
       <AppLayout>
         <Switch>
           <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/home" exact>
             <Home />
           </Route>
           <Route path="/albums" exact>

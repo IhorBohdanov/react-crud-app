@@ -1,12 +1,14 @@
 import React from "react";
 import { Form, Input, Button, InputNumber } from "antd";
 import { message } from 'antd';
+import { useHistory } from 'react-router-dom';
 
 export default function EditForm(props) {
+  const history = useHistory()
   let { formModel } = props;
   let { title, setTitle, userId, setUserId, id } = formModel;
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const params = {
       title,
       userId
@@ -17,8 +19,9 @@ export default function EditForm(props) {
       message.error({ content: 'Please fill out all fields'});
       return;
     }
-    
-    props.handleSubmit(params)
+
+    await props.handleSubmit(params)
+    history.push('/albums');
   } 
 
   return (
@@ -37,13 +40,11 @@ export default function EditForm(props) {
           </Form.Item>
         ) 
       }
-      
       <Form.Item
         label="Title"
       >
         <Input value={title} onChange={(e) => setTitle(e.target.value)} />
       </Form.Item>
-
       <Form.Item
         label="User Id"
       >

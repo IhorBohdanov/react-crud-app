@@ -5,8 +5,8 @@ function CreateAlbum(props) {
   let [title, setTitle] = useState("");
   let [userId, setUserId] = useState(1);
 
-  const handleSubmit = (payload) => {
-    props.handleCreate(payload)
+  const handleSubmit = async (payload) => {
+    await props.handleCreate(payload)
   }
 
   return (
@@ -17,4 +17,4 @@ function CreateAlbum(props) {
   );
 }
   
-  export default CreateAlbum;
+export default CreateAlbum;

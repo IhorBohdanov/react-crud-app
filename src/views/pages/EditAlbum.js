@@ -8,8 +8,8 @@ function EditAlbum(props) {
   const { id } = useParams();
   let  { title, userId, setTitle, setUserId } = useFetchAlbum(id);
 
-  const handleSubmit = () => {
-    return props.handleEdit({ id, title, userId })
+  const handleSubmit = async () => {
+    await props.handleEdit({ id, title, userId })
   } 
 
   return (
