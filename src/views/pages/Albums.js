@@ -1,6 +1,5 @@
 import React from 'react';
-import { List, Avatar, Button } from 'antd';
-import { Link } from 'react-router-dom';
+import { List } from 'antd';
 import AlbumItem from '../components/AlbumItem';
 
 
@@ -13,7 +12,7 @@ export default function Albums(props) {
             <List
               dataSource={props.albums}
               renderItem={item => (
-                <AlbumItem item={item} key={item.id}/>
+                <AlbumItem item={item} key={item.id} handleDelete={props.handleDelete}/>
               )}
             />
           )

@@ -5,14 +5,15 @@ import EditAlbum from './views/pages/EditAlbum';
 import SingleAlbum from './views/pages/SingleAlbum';
 import Page404 from './views/pages/Page404';
 import { deleteAlbum, createAlbum, updateAlbum } from './api';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { message } from 'antd';
 import { useFetchAlbums } from './hooks';
-import AppLayout from './views/components/AppLayout'
+import AppLayout from './views/components/AppLayout';
+import history from './history';
 
 
 function App() {
-  let [albums, setAlbums] = useFetchAlbums()
+  let [albums, setAlbums] = useFetchAlbums();
 
   const handleCreate = async (payload) => {
     try {
@@ -21,6 +22,7 @@ function App() {
       message.success({
         content: 'Album successfuly created'
       })
+      history.push('/home')
     } catch (error) {
       message.error({
         content: 'Fail to create album'
@@ -54,6 +56,7 @@ function App() {
       message.success({
         content: 'Album successfuly edited'
       })
+      history.push('/albums')
     } catch (error) {
       message.error({
         content: 'Fail to delete album'

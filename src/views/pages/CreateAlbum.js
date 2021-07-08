@@ -3,7 +3,7 @@ import EditForm from '../components/EditForm';
 
 function CreateAlbum(props) {
   let [title, setTitle] = useState("");
-  let [userId, setUserId] = useState(null);
+  let [userId, setUserId] = useState(1);
 
   const handleSubmit = (payload) => {
     props.handleCreate(payload)
@@ -12,7 +12,7 @@ function CreateAlbum(props) {
   return (
     <div>
       <h2>Create Album</h2>
-      <EditForm handleSubmit={handleSubmit}/>
+      <EditForm formModel={{ title, setTitle, userId, setUserId }} handleSubmit={handleSubmit}/>
     </div>
   );
 }

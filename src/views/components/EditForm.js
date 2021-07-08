@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import { Form, Input, Button, InputNumber } from "antd";
-import { useFetchAlbum } from '../../hooks';
 
 export default function EditForm(props) {
-  let [title, setTitle] = useState('');
-  let [userId, setUserId] = useState('');
-
+  let { formModel } = props;
+  let { title, setTitle, userId, setUserId, id } = formModel;
 
   const handleSubmit = () => {
     const params = {
@@ -14,10 +11,12 @@ export default function EditForm(props) {
       userId
     }
 
-    props.album?.id && (params.id = props.album.id)
+    id && (params.id = id)
     
     props.handleSubmit(params)
   } 
+
+  
 
   return (
     <Form
@@ -27,11 +26,11 @@ export default function EditForm(props) {
       onFinish={handleSubmit}
     >
       {
-        !!props.album?.id && (
+        id && (
           <Form.Item
             label="Id"
           >
-            <InputNumber value={props.album.id} disabled />
+            <InputNumber value={id} disabled />
           </Form.Item>
         ) 
       }

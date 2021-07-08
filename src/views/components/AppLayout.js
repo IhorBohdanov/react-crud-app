@@ -1,13 +1,14 @@
 import React from 'react'
 import { Layout, Menu } from 'antd';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import history from '../../history';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function AppLayout(props) {
     return (
         <Layout>
-        <Router>
+        <Router history={history}>
           <Sider>
             <div className="logo" />
             <Menu theme="dark" mode="inline">
