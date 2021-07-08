@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Input, Button, InputNumber } from "antd";
+import { message } from 'antd';
 
 export default function EditForm(props) {
   let { formModel } = props;
@@ -10,13 +11,15 @@ export default function EditForm(props) {
       title,
       userId
     }
-
     id && (params.id = id)
+
+    if (!title || !userId ) {
+      message.error({ content: 'Please fill out all fields'});
+      return;
+    }
     
     props.handleSubmit(params)
   } 
-
-  
 
   return (
     <Form
@@ -44,7 +47,7 @@ export default function EditForm(props) {
       <Form.Item
         label="User Id"
       >
-        <InputNumber value={userId} onChange={(e) => setUserId(e)} />
+        <InputNumber min={1} max={10} value={userId} onChange={(e) => setUserId(e)} />
       </Form.Item>
       <Form.Item>
         <Button type="primary" htmlType="submit">

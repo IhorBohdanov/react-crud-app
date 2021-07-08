@@ -9,11 +9,7 @@ function EditAlbum(props) {
   let  { title, userId, setTitle, setUserId } = useFetchAlbum(id);
 
   const handleSubmit = () => {
-    props.handleEdit({
-      id,
-      title,
-      userId
-    })
+    return props.handleEdit({ id, title, userId })
   } 
 
   return (

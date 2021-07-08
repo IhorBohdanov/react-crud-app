@@ -11,7 +11,6 @@ import { useFetchAlbums } from './hooks';
 import AppLayout from './views/components/AppLayout';
 import history from './history';
 
-
 function App() {
   let [albums, setAlbums] = useFetchAlbums();
 
@@ -22,7 +21,7 @@ function App() {
       message.success({
         content: 'Album successfuly created'
       })
-      history.push('/home')
+      history.push('/albums')
     } catch (error) {
       message.error({
         content: 'Fail to create album'
