@@ -12,56 +12,54 @@ import AppLayout from './views/components/AppLayout';
 
 
 function App() {
-  let [albums, setAlbums] = useFetchAlbums();
+  // const handleCreate = async (payload) => {
+  //   try {
+  //     const res = await createAlbum(payload)
+  //     setAlbums([...albums, res.data])
+  //     message.success({
+  //       content: 'Album successfuly created'
+  //     })
+  //     return true
+  //   } catch (error) {
+  //     message.error({
+  //       content: 'Fail to create album'
+  //     })
+  //   }
+  // }
 
-  const handleCreate = async (payload) => {
-    try {
-      const res = await createAlbum(payload)
-      setAlbums([...albums, res.data])
-      message.success({
-        content: 'Album successfuly created'
-      })
-      return true
-    } catch (error) {
-      message.error({
-        content: 'Fail to create album'
-      })
-    }
-  }
+  // const handleDelete = async (id) => {
+  //   try {
+  //     await deleteAlbum(id)
+  //     setAlbums(albums.filter(item => item.id !== id))
+  //     message.success({
+  //       content: 'Album successfuly deleted'
+  //     })
+  //   } catch (error) {
+  //     message.error({
+  //       content: 'Fail to delete album'
+  //     })
+  //   }
+  // }
 
-  const handleDelete = async (id) => {
-    try {
-      await deleteAlbum(id)
-      setAlbums(albums.filter(item => item.id !== id))
-      message.success({
-        content: 'Album successfuly deleted'
-      })
-    } catch (error) {
-      message.error({
-        content: 'Fail to delete album'
-      })
-    }
-  }
-
-  const handleEdit = async (payload) => {
-    try {
-      const res = await updateAlbum(payload)
-      const index = albums.findIndex(
-        album => album.id === res.data.id
-      );
-      let albumArr = [...albums]
-      albumArr.splice(index, 1, res.data)
-      setAlbums(albumArr)
-      message.success({
-        content: 'Album successfuly edited'
-      })
-      return true
-    } catch (error) {
-      message.error({
-        content: 'Fail to delete album'
-      })
-    }
-  }
+  // const handleEdit = async (payload) => {
+  //   try {
+  //     const res = await updateAlbum(payload)
+  //     const index = albums.findIndex(
+  //       album => album.id === res.data.id
+  //     );
+  //     let albumArr = [...albums]
+  //     albumArr.splice(index, 1, res.data)
+  //     setAlbums(albumArr)
+  //     message.success({
+  //       content: 'Album successfuly edited'
+  //     })
+  //     return true
+  //   } catch (error) {
+  //     message.error({
+  //       content: 'Fail to delete album'
+  //     })
+  //   }
+  // }
 
   return (
     <div className="App">
@@ -71,9 +69,10 @@ function App() {
             <Home />
           </Route>
           <Route path="/albums" exact>
-            <Albums albums={albums} handleDelete={handleDelete} />
+            <Albums />
+            {/* handleDelete={handleDelete} */}
           </Route>
-          <Route path="/albums/:id" exact>
+          {/* <Route path="/albums/:id" exact>
             <SingleAlbum />
           </Route>
           <Route path="/create-album" exsact>
@@ -84,7 +83,7 @@ function App() {
           </Route>
           <Route path="*">
             <Page404 />
-          </Route>
+          </Route> */}
         </Switch>
       </AppLayout>
     </div>

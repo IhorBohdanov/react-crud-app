@@ -1,17 +1,16 @@
-import {FETCH_ALBUMS} from './types'
+import { SET_ALBUMS, DELETE_ALBUM } from './types'
 
 const initialState = {
   albums: [],
-  fetchedPosts: []
 }
 
-// Pure Functions
 export const albumsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_ALBUMS:
-      return { ...state, albums: state.albums.concat([action.payload]) }
-    // case FETCH_POSTS:
-    //   return { ...state, fetchedPosts: action.payload }
+    case SET_ALBUMS:
+      console.log(action)
+      return { ...state, albums: action.payload}
+    case DELETE_ALBUM:
+      return { ...state, albums: state.albums.filter(album => album.id !== action.payload )}
     default: return state
   }
 }

@@ -1,4 +1,4 @@
-// import {CREATE_POST, FETCH_POSTS, HIDE_ALERT, HIDE_LOADER, REQUEST_POSTS, SHOW_ALERT, SHOW_LOADER} from './types'
+import { LOAD_POSTS, REQUEST_ALBUMS, REMOVE_ALBUM, DELETE_ALBUM } from './types'
 
 // export function createPost(post) {
 //   return {
@@ -57,3 +57,23 @@
 //   //   }
 //   // }
 // }
+
+export function requestAlbums() {
+  return {
+    type: REQUEST_ALBUMS
+  }
+}
+
+export function removeAlbum(id) {
+    return {
+      type: REMOVE_ALBUM,
+      payload: id
+    }
+}
+
+export function deleteAlbum(id) {
+    return {
+      type: DELETE_ALBUM,
+      payload: id
+    }
+}

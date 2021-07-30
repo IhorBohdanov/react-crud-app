@@ -1,17 +1,17 @@
 import {takeEvery, put, call} from 'redux-saga/effects'
-// import {FETCH_POSTS, REQUEST_POSTS} from './types'
-import {hideLoader, showAlert, showLoader} from './actions'
-import { getAlbums } from '../api'
+import { REQUEST_ALBUMS, SET_ALBUMS, DELETE_ALBUM, REMOVE_ALBUM, } from './types'
+import { getAlbums, deleteAlbum } from '../api'
 
 export function* sagaWatcher() {
-  yield takeEvery(FETCH_POSTS, sagaWorker)
+  yield takeEvery(REQUEST_ALBUMS, requestAlbums);
+  yield takeEvery(REMOVE_ALBUM, removeAlbum);
 }
 
-function* sagaWorker() {
+function* requestAlbums() {
   try {
     // yield put(showLoader())
-    const payload = yield call(fetchPosts)
-    // yield put({ type: FETCH_POSTS, payload })
+    const payload = yield call(fetchAlbums)
+    yield put({ type: SET_ALBUMS, payload: payload.data })
     // yield put(hideLoader())
   } catch (e) {
     // yield put(showAlert('Что-то пошло не так'))
@@ -19,7 +19,30 @@ function* sagaWorker() {
   }
 }
 
-async function fetchPosts() {
+function* removeAlbum({payload}) {
+  console.log('from saga: ', payload)
+  try {
+    // yield put(showLoader())
+    const res = yield call(requestDeleteAlbum, payload)
+    // yield put(hideLoader())
+    yield put({ type: DELETE_ALBUM, payload: payload })
+  } catch (e) {
+    // yield put(showAlert('Что-то пошло не так'))
+    // yield put(hideLoader())
+  }
+}
+
+async function requestDeleteAlbum(id) {
+  console.log('from function: ', id)
+  try {
+    const response = await deleteAlbum(id)
+    return response
+  } catch(error) {
+    console.log(error)
+  }
+}
+
+async function fetchAlbums() {
     try {
         const response = await getAlbums()
         return response

@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
 import { getAlbums } from '../api';
 import { message } from 'antd';
+import {useDispatch, useSelector} from 'react-redux';
+import {requestAlbums, removeAlbum} from '../store/actions'
 
 export const useFetchAlbums = () => {
-    let [albums, setAlbums] = useState([]);
+  const dispatch = useDispatch()
+  const albums = useSelector(state => state.albums.albums)
 
-    useEffect(() => {
-      getAlbums()
-        .then((res) => {
-          setAlbums(res.data)
-        })
-        .catch((error) => {
-          message.error({
-            content: 'Fail to fetch albums'
-          })
-        })
-    }, [])
+  const deleteAlbum = (id) => {
+    dispatch(removeAlbum(id))
+  }
 
-    return [albums, setAlbums]
+  useEffect(() => {
+    dispatch(requestAlbums())
+  }, [])
+
+  return { albums, deleteAlbum }
 }
