@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
-import { getAlbums } from '../api';
-import { message } from 'antd';
+import { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {requestAlbums, removeAlbum} from '../store/actions'
+import {requestAlbums, removeAlbum } from '../store/actions'
 
-export const useFetchAlbums = () => {
+export const useAlbums = () => {
   const dispatch = useDispatch()
   const albums = useSelector(state => state.albums.albums)
 

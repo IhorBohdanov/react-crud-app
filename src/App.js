@@ -4,62 +4,13 @@ import CreateAlbum from './views/pages/CreateAlbum';
 import EditAlbum from './views/pages/EditAlbum';
 import SingleAlbum from './views/pages/SingleAlbum';
 import Page404 from './views/pages/Page404';
-import { deleteAlbum, createAlbum, updateAlbum } from './api';
 import { Route, Switch } from 'react-router-dom';
-import { message } from 'antd';
-import { useFetchAlbums } from './hooks';
+import { useAlbums } from './hooks';
 import AppLayout from './views/components/AppLayout';
 
 
 function App() {
-  // const handleCreate = async (payload) => {
-  //   try {
-  //     const res = await createAlbum(payload)
-  //     setAlbums([...albums, res.data])
-  //     message.success({
-  //       content: 'Album successfuly created'
-  //     })
-  //     return true
-  //   } catch (error) {
-  //     message.error({
-  //       content: 'Fail to create album'
-  //     })
-  //   }
-  // }
-
-  // const handleDelete = async (id) => {
-  //   try {
-  //     await deleteAlbum(id)
-  //     setAlbums(albums.filter(item => item.id !== id))
-  //     message.success({
-  //       content: 'Album successfuly deleted'
-  //     })
-  //   } catch (error) {
-  //     message.error({
-  //       content: 'Fail to delete album'
-  //     })
-  //   }
-  // }
-
-  // const handleEdit = async (payload) => {
-  //   try {
-  //     const res = await updateAlbum(payload)
-  //     const index = albums.findIndex(
-  //       album => album.id === res.data.id
-  //     );
-  //     let albumArr = [...albums]
-  //     albumArr.splice(index, 1, res.data)
-  //     setAlbums(albumArr)
-  //     message.success({
-  //       content: 'Album successfuly edited'
-  //     })
-  //     return true
-  //   } catch (error) {
-  //     message.error({
-  //       content: 'Fail to delete album'
-  //     })
-  //   }
-  // }
+  let {albums, deleteAlbum } = useAlbums();
 
   return (
     <div className="App">
@@ -69,21 +20,22 @@ function App() {
             <Home />
           </Route>
           <Route path="/albums" exact>
-            <Albums />
+            <Albums albums={albums} onAlbumDelete={deleteAlbum}/>
             {/* handleDelete={handleDelete} */}
           </Route>
-          {/* <Route path="/albums/:id" exact>
+          <Route path="/albums/:id" exact>
             <SingleAlbum />
           </Route>
           <Route path="/create-album" exsact>
-            <CreateAlbum handleCreate={handleCreate} />
+            <CreateAlbum />
+            {/* handleCreate={handleCreate} */}
           </Route>
           <Route path="/edit-album/:id" exsact>
-            <EditAlbum handleEdit={handleEdit} />
+            <EditAlbum />
           </Route>
           <Route path="*">
             <Page404 />
-          </Route> */}
+          </Route>
         </Switch>
       </AppLayout>
     </div>

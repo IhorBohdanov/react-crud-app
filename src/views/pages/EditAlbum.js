@@ -1,15 +1,15 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useFetchAlbum } from '../../hooks';
+import { useAlbum } from '../../hooks';
 import EditForm from '../components/EditForm';
 
 
-function EditAlbum(props) {
-  const { id } = useParams();
-  let  { title, userId, setTitle, setUserId } = useFetchAlbum(id);
+function EditAlbum() {
+  const { id } = useParams();  
+  let  { title, userId, setTitle, setUserId, editAlbum } = useAlbum(id);
 
   const handleSubmit = async () => {
-    await props.handleEdit({ id, title, userId })
+    await editAlbum({ id: +id, title, userId })
   } 
 
   return (

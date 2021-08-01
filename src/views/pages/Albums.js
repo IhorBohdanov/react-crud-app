@@ -1,12 +1,8 @@
 import React from 'react';
 import { List } from 'antd';
 import AlbumItem from '../components/AlbumItem';
-import { useFetchAlbums } from '../../hooks';
 
-
-export default function Albums(props) {
-  let {albums, deleteAlbum} = useFetchAlbums();
-
+export default function Albums({albums, onAlbumDelete}) {
   return (
     <div>
       {
@@ -15,7 +11,7 @@ export default function Albums(props) {
             <List
               dataSource={albums}
               renderItem={item => (
-                <AlbumItem item={item} key={item.id} handleDelete={deleteAlbum}/>
+                <AlbumItem item={item} key={item.id} handleDelete={onAlbumDelete}/>
               )}
             />
           )
