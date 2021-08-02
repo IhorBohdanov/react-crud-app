@@ -21,14 +21,12 @@ function App() {
           </Route>
           <Route path="/albums" exact>
             <Albums albums={albums} onAlbumDelete={deleteAlbum}/>
-            {/* handleDelete={handleDelete} */}
           </Route>
           <Route path="/albums/:id" exact>
             <SingleAlbum />
           </Route>
           <Route path="/create-album" exsact>
             <CreateAlbum />
-            {/* handleCreate={handleCreate} */}
           </Route>
           <Route path="/edit-album/:id" exsact>
             <EditAlbum />
