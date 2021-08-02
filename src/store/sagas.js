@@ -8,14 +8,14 @@ export function* sagaWatcher() {
   yield takeEvery(REQUEST_ALBUMS, requestAlbums);
   yield takeEvery(REMOVE_ALBUM, removeAlbum);
   yield takeEvery(MUTATE_ALBUM, mutateAlbum);
-  yield takeEvery(POST_ALBUM, postAlbum)
-  yield takeEvery(FETCH_ALBUM, fetchAlbum)
+  yield takeEvery(POST_ALBUM, postAlbum);
+  yield takeEvery(FETCH_ALBUM, fetchAlbum);
 }
 
 function* requestAlbums() {
   try {
     yield put(showLoader())
-    const payload = yield call(fetchAlbums)
+    const payload = yield call(getAlbums)
     yield put({ type: SET_ALBUMS, payload: payload.data })
     yield put(hideLoader())
   } catch (error) {
@@ -27,7 +27,7 @@ function* requestAlbums() {
 function* removeAlbum({ payload }) {
   try {
     yield put(showLoader())
-    yield call(requestDeleteAlbum, payload)
+    yield call(deleteAlbum, payload)
     yield put({ type: DELETE_ALBUM, payload: payload })
     yield call(showSuccess, 'Album successfuly removed')
     yield put(hideLoader())
@@ -40,7 +40,7 @@ function* removeAlbum({ payload }) {
 function* mutateAlbum({ payload }) {
   try {
     yield put(showLoader())
-    const res = yield call(requestEditAlbum, payload)
+    const res = yield call(updateAlbum, payload)
     yield put({ type: UPDATE_ALBUM, payload: res })
     yield call(showSuccess, 'Album successfuly updated')
     yield put(hideLoader())
@@ -53,7 +53,7 @@ function* mutateAlbum({ payload }) {
 function* postAlbum({ payload }) {
   try {
     yield put(showLoader())
-    const res = yield call(addAlbum, payload)
+    const res = yield call(createAlbum, payload)
     yield put({ type: ADD_ALBUM, payload: res })
     yield call(showSuccess, 'Album successfuly created')
     yield put(hideLoader())
@@ -66,7 +66,7 @@ function* postAlbum({ payload }) {
 function* fetchAlbum({ payload }) {
   try {
     yield put(showLoader())
-    const res = yield call(loadAlbum, payload)
+    const res = yield call(getAlbum, payload)
     console.log(res)
     yield put({ type: SET_TITLE, payload: res.title })
     yield put({ type: SET_USER, payload: res.userId })
@@ -74,57 +74,6 @@ function* fetchAlbum({ payload }) {
   } catch (error) {
     yield call(showError, 'Fail to download album')
     yield put(hideLoader())
-  }
-}
-
-
-async function requestDeleteAlbum(id) {
-  try {
-    await deleteAlbum(id)
-  } catch (error) {
-    console.log(error)
-    throw error
-  }
-}
-
-async function requestEditAlbum(payload) {
-  console.log('from function: ', payload)
-  try {
-    const response = await updateAlbum(payload)
-    return response.data
-  } catch (error) {
-    console.log(error)
-    throw error
-  }
-}
-
-async function fetchAlbums() {
-  try {
-    const response = await getAlbums()
-    return response
-  } catch (error) {
-    console.log(error)
-    throw error
-  }
-}
-
-async function addAlbum(album) {
-  try {
-    const response = await createAlbum(album)
-    return response.data
-  } catch (error) {
-    console.log(error)
-    throw error
-  }
-}
-
-async function loadAlbum(id) {
-  try {
-    const response = await getAlbum(id)
-    return response.data
-  } catch (error) {
-    console.log(error)
-    throw error
   }
 }
 
