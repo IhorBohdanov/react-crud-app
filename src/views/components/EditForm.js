@@ -26,7 +26,6 @@ export default function EditForm(props) {
       name="basic"
       wrapperCol={{ span: 16 }}
       layout="vertical"
-      onFinish={handleSubmit}
     >
       {
         id && (
@@ -48,7 +47,7 @@ export default function EditForm(props) {
         <InputNumber min={1} max={10} value={userId} onChange={(e) => setUserId(e)} />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" onClick={handleSubmit}>
           Submit
         </Button>
       </Form.Item>
