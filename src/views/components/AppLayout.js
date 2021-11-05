@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 const { Header, Content, Footer, Sider } = Layout;
 
 export default function AppLayout(props) {
-  const loaderVisible = useSelector(state => state.app.loaderVisible)
+  
   return (
     <Layout>
       <Router>
@@ -33,7 +33,7 @@ export default function AppLayout(props) {
         <Layout>
           <Header className="site-layout-sub-header-background" style={{ padding: 0 }} />
           <Content style={{ margin: '24px 16px 0' }}>
-            <Spin spinning={loaderVisible}>
+            <Spin spinning={props.loaderVisible}>
               <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                 {props.children}
               </div>

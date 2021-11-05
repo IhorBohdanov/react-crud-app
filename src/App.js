@@ -7,14 +7,16 @@ import Page404 from './views/pages/Page404';
 import { Route, Switch } from 'react-router-dom';
 import { useAlbums } from './hooks';
 import AppLayout from './views/components/AppLayout';
+import { useSelector } from 'react-redux';
 
 
 function App() {
   let {albums, deleteAlbum } = useAlbums();
+  const loaderVisible = useSelector(state => state.app.loaderVisible)
 
   return (
     <div className="App">
-      <AppLayout>
+      <AppLayout loaderVisible={loaderVisible}>
         <Switch>
           <Route path="/" exact>
             <Home />
