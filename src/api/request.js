@@ -12,7 +12,7 @@ export const getAlbums = async () => {
 export const getAlbum = async (id) => {
   try {
     const res = await api.get(`${id}`)
-    return res
+    return res.data
   } catch(error) {
     throw error
   }
@@ -30,7 +30,7 @@ export const getPhotos= async (id) => {
 export const createAlbum = async (payload) => {
   try {
     const res = await api.post('', payload)
-    return res
+    return res.data
   } catch (error) {
     throw error
   }
@@ -53,7 +53,7 @@ export const updateAlbum = async (payload) => {
     }
 
     const res = await api.put(`${payload.id}`, params)
-    return res
+    return res.data
   } catch (error) {
     throw error
   }
