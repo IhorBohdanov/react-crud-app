@@ -1,10 +1,8 @@
 import React from "react";
 import { Form, Input, Button, InputNumber } from "antd";
 import { message } from 'antd';
-import { useHistory } from 'react-router-dom';
 
 export default function EditForm(props) {
-  const history = useHistory()
   let { formModel } = props;
   let { title, setTitle, userId, setUserId, id } = formModel;
 
@@ -21,7 +19,6 @@ export default function EditForm(props) {
     }
 
     await props.handleSubmit(params)
-    history.push('/albums');
   } 
 
   return (

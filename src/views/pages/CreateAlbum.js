@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import EditForm from '../components/EditForm';
+import { useAlbum } from '../../hooks';
 
 function CreateAlbum(props) {
-  let [title, setTitle] = useState("");
-  let [userId, setUserId] = useState(1);
-
-  const handleSubmit = async (payload) => {
-    await props.handleCreate(payload)
-  }
+  const { title, userId, setTitle, setUserId, createAlbum } = useAlbum();
 
   return (
     <div>
       <h2>Create Album</h2>
-      <EditForm formModel={{ title, setTitle, userId, setUserId }} handleSubmit={handleSubmit}/>
+      <EditForm formModel={{ title, setTitle, userId, setUserId }} handleSubmit={createAlbum}/>
     </div>
   );
 }

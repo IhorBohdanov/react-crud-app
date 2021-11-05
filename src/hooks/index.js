@@ -1,3 +1,3 @@
-export * from './useFetchAlbums';
-export * from './useFetchAlbum';
+export * from './useAlbums';
+export * from './useAlbum';
 export * from './useFetchPhotos';

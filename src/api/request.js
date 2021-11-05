@@ -13,7 +13,6 @@ export const getAlbum = async (id) => {
   try {
     const res = await api.get(`${id}`)
     return res
-
   } catch(error) {
     throw error
   }
@@ -23,7 +22,6 @@ export const getPhotos= async (id) => {
   try {
     const res = await api.get(`${id}/photos`)
     return res
-
   } catch(error) {
     throw error
   }
