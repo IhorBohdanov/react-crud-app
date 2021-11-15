@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import React, { Fragment } from 'react';
 import { Row, Col } from 'antd';
 import { useAlbum, useFetchPhotos } from '../../hooks';
 
 export default function SingleAlbum() {
-  const { id } = useParams()
+  const { id } = useParams();
 
   let { title } = useAlbum(id);
   let [photos] = useFetchPhotos(id);
