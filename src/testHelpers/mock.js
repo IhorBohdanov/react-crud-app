@@ -1,7 +1,7 @@
-export const albumData = { 
-  id: 1, 
-  title: "Album title", 
-  userId: 1 
+export const albumData = {
+  id: 1,
+  title: "Album title",
+  userId: 1,
 };
 
 export const photos = [
@@ -24,6 +24,19 @@ export const photos = [
     id: 3,
     title: "officia porro iure quia iusto qui ipsa ut modi",
     url: "https://via.placeholder.com/600/24f355",
-    thumbnailUrl: "https://via.placeholder.com/150/24f355"
+    thumbnailUrl: "https://via.placeholder.com/150/24f355",
+  },
+];
+
+export const albums = [
+  {
+    id: 1,
+    title: "quidem molestiae enim",
+    userId: 1,
+  },
+  {
+    id: 2,
+    title: "sunt qui excepturi placeat culpa",
+    userId: 2,
   },
 ];

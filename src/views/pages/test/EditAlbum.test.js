@@ -32,10 +32,6 @@ const rerender = (route = "/albums/1") => {
 
 
 describe("Single Album page", () => {
-  beforeEach(() => {
-    mockAxios();
-  });
-
   it("render with data", async () => {
     mockAxios(albumData, photos);
 

@@ -8,6 +8,11 @@ describe("Home page", () => {
     render(<Home />);
   });
 
+  it('match snapshot', () => {
+    const { asFragment } = render(<Home />);
+    expect(asFragment(<Home />)).toMatchSnapshot();
+  });
+
   it("render heading", () => {
     const heading = screen.getByRole("heading");
     expect(heading).toBeInTheDocument();

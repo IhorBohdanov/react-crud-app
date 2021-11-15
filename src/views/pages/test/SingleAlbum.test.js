@@ -30,12 +30,7 @@ const rerender = (route = "/albums/1") => {
   render(wrapWithRedux(wrapWithRout(<SingleAlbum />, {path: "/albums/:id", route })))
 }
 
-
 describe("Single Album page", () => {
-  beforeEach(() => {
-    mockAxios();
-  });
-
   it("render with data", async () => {
     mockAxios(albumData, photos);
 
@@ -56,7 +51,7 @@ describe("Single Album page", () => {
 
     const title = screen.queryByRole("heading");
     const images = screen.queryAllByRole('img');
-    const noDataLable = screen.getByText(/No data/i); 
+    const noDataLable = screen.getByText(/No data/i);
     expect(title).not.toBeInTheDocument();
     expect(images).toHaveLength(0);
     expect(noDataLable).toBeInTheDocument();

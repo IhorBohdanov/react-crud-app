@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Albums page match snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <h1>
+      Albums page
+    </h1>
+    No data
+  </div>
+</DocumentFragment>
+`;
