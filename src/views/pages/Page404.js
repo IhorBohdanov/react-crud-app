@@ -1,7 +1,5 @@
 function Page404() {
-    return (
-      "404"
-    );
-  }
-  
-  export default Page404;
+  return <p>{"404"}</p>;
+}
+
+export default Page404;

@@ -66,8 +66,7 @@ function* postAlbum({ payload }) {
 function* fetchAlbum({ payload }) {
   try {
     yield put(showLoader())
-    const res = yield call(getAlbum, payload)
-    console.log(res)
+    const res = yield call(getAlbum, payload)    
     yield put({ type: SET_TITLE, payload: res.title })
     yield put({ type: SET_USER, payload: res.userId })
     yield put(hideLoader())
