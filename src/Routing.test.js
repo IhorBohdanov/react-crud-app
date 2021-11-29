@@ -53,4 +53,11 @@ describe("Router", () => {
     const heading = screen.getByRole("heading", { name: "Create Album" });
     expect(heading).toBeInTheDocument();
   });
+
+  it("should go to go to Home page, when user click Logo", async () => {
+    const logoLink = screen.getByText(/logo/i);
+    userEvent.click(logoLink);
+    const heading = screen.getByRole("heading", { name: "Home page" });
+    expect(heading).toBeInTheDocument();
+  });
 });

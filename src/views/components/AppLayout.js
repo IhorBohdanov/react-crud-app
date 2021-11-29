@@ -11,7 +11,9 @@ export default function AppLayout(props) {
     <Layout>
       <Router>
         <Sider>
-          <div className="logo">Logo</div>
+          <Link className="logo" to="/">
+            Logo
+          </Link>
           <Menu theme="dark" mode="inline">
             <Menu.Item key="/">
               <Link to="/">
