@@ -61,6 +61,22 @@ describe("EditForm component", () => {
     expect(submitButton).toBeInTheDocument();
   });
 
+  it("validation error pop-up should be displayed if user press submit button with empty form fields", () => {
+    formModel={
+      title: "",
+      userId: "",
+      setTitle: jest.fn(),
+      setUserId: jest.fn(),
+    }
+    render(<EditForm formModel={formModel} handleSubmit={handleSubmit}/>);
+    const submitButton = screen.getByRole("button", { name: "Submit" });
+    userEvent.click(submitButton);
+    const validationPopup = screen.queryByText(/Please fill out all fields/i);
+    expect(validationPopup).toBeInTheDocument();
+    expect(handleSubmit).not.toBeCalled();
+    
+  });
+
   it("callback function shuldn't be called when user press submit button but title is't set", () => {
     formModel={
       title: "",
@@ -88,7 +104,7 @@ describe("EditForm component", () => {
     expect(handleSubmit).not.toBeCalled();
   });
 
-  it("callback function shuld be called when user press submit button with filled forms", () => {
+  it("callback function shuld be called when user press submit button with filled form fields", () => {
     render(<EditForm formModel={formModel} handleSubmit={handleSubmit}/>);
     const submitButton = screen.getByRole("button", { name: "Submit" });
     userEvent.click(submitButton);
@@ -113,7 +129,6 @@ describe("EditForm component", () => {
     const userIdInput = screen.getAllByRole("spinbutton")[1];
     userEvent.type(userIdInput, "1");
     userEvent.tab(); // to fire blur change event (blur)
-    screen.debug(userIdInput);
     expect(formModel.setUserId).toBeCalled();
   })
 });
