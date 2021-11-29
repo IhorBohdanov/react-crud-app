@@ -5,7 +5,7 @@ import Page404 from "../Page404";
 
 describe("404 page", () => {
 
-  it('match snapshot', () => {
+  it('should match snapshot', () => {
     const { asFragment } = render(<Page404 />);
     expect(asFragment(<Page404 />)).toMatchSnapshot();
   });

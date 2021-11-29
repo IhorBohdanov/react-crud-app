@@ -19,7 +19,7 @@ describe("EditForm component", () => {
     handleSubmit = jest.fn();
   });
 
-  it("Render component without existing album", () => {
+  it("should be rendered without existing album", () => {
     formModel = {
       title: "",
       userId: "",
@@ -42,7 +42,7 @@ describe("EditForm component", () => {
     expect(submitButton).toBeInTheDocument();
   });
 
-  it("Render component with existing album", () => {
+  it("should be rendered with existing album", () => {
     render(<EditForm formModel={formModel} />);
     const idLabel = screen.getByText("Id");
     const titleLabel = screen.getByText("Title");
@@ -61,7 +61,7 @@ describe("EditForm component", () => {
     expect(submitButton).toBeInTheDocument();
   });
 
-  it("submit button press with empty title value", () => {
+  it("callback function shuldn't be called when user press submit button but title is't set", () => {
     formModel={
       title: "",
       userId: 2,
@@ -75,7 +75,7 @@ describe("EditForm component", () => {
   });
 
 
-  it("submit button press with empty userId value", () => {
+  it("callback function shuldn't be called when user press submit button but userId is't set", () => {
     formModel={
       title: "sunt qui excepturi placeat culpa",
       userId: "",
@@ -88,7 +88,7 @@ describe("EditForm component", () => {
     expect(handleSubmit).not.toBeCalled();
   });
 
-  it("submit button press with correct data", () => {
+  it("callback function shuld be called when user press submit button with filled forms", () => {
     render(<EditForm formModel={formModel} handleSubmit={handleSubmit}/>);
     const submitButton = screen.getByRole("button", { name: "Submit" });
     userEvent.click(submitButton);
@@ -101,14 +101,14 @@ describe("EditForm component", () => {
     });
   });
 
-  it("fire title change handler", () => {
+  it("callback function shuld be called when user change title value", () => {
     render(<EditForm formModel={formModel} handleSubmit={handleSubmit}/>);
     const titleInput = screen.getByRole("textbox");
     userEvent.type(titleInput, "test string");
     expect(formModel.setTitle).toBeCalled();
   })
 
-  it("fire userId change handler", () => {
+  it("callback function shuld be called when user change userId value", () => {
     render(<EditForm formModel={formModel} handleSubmit={handleSubmit}/>);
     const userIdInput = screen.getAllByRole("spinbutton")[1];
     userEvent.type(userIdInput, "1");

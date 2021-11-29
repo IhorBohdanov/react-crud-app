@@ -22,7 +22,7 @@ describe("AlbumItem component", () => {
     );
   });
 
-  it("Render component", () => {
+  it("should render passed info about the album", () => {
     const title = screen.getByText(/sunt qui excepturi placeat culpa/i);
     const id = screen.getByText(/2/i);
     const deleteButton = screen.getByRole('button', { name: 'Delete'});
@@ -33,7 +33,7 @@ describe("AlbumItem component", () => {
     expect(editButton).toBeInTheDocument();
   });
 
-  it("Delete button press", () => {
+  it("should call callback when delete button is clicked", () => {
     const deleteButton = screen.getByRole('button', { name: 'Delete' });
     userEvent.click(deleteButton);
     expect(handleDelete).toBeCalled();

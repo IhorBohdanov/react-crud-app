@@ -9,13 +9,13 @@ describe("Create Album page", () => {
     render(wrapWithRedux(<CreateAlbum />));
   });
 
-  it("render heading", () => {
+  it("should render heading", () => {
     const heading = screen.getByRole("heading");
     expect(heading).toBeInTheDocument();
     expect(heading).toHaveTextContent(/Create album/i);
   });
 
-  it("render form", () => {
+  it("should render form", () => {
     const titleLabel = screen.getByText("Title");
     const userIdLabel = screen.getByText("User Id");
     const titleInput = screen.getByRole("textbox");

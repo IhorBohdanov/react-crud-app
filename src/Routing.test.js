@@ -24,7 +24,7 @@ describe("Router", () => {
     });
   });
 
-  it("go to invalid url", async () => {
+  it("should redirect to 404 page when user go to invalid url", async () => {
     const history = createMemoryHistory();
     // It works only when i set route directly to render function
     renderWithRouter(
@@ -40,14 +40,14 @@ describe("Router", () => {
     expect(Label404).toBeInTheDocument();
   });
 
-  it("go to Albums page", async () => {
+  it("should go to go to Albums page, when user click Albums link", async () => {
     const linkAlbums = screen.getByRole("link", { name: "Albums" });
     userEvent.click(linkAlbums);
     const heading = screen.getByRole("heading", { name: "Albums page" });
     expect(heading).toBeInTheDocument();
   });
 
-  it("go to Create album page", async () => {
+  it("should go to go to Create album page, when user click Create album link", async () => {
     const linkCreteAlbum = screen.getByRole("link", { name: "Create album" });
     userEvent.click(linkCreteAlbum);
     const heading = screen.getByRole("heading", { name: "Create Album" });

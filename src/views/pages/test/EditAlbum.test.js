@@ -32,7 +32,7 @@ const rerender = (route = "/albums/1") => {
 
 
 describe("Single Album page", () => {
-  it("render with data", async () => {
+  it("should be rendered with album data", async () => {
     mockAxios(albumData, photos);
 
     await act(async () => {
@@ -44,7 +44,7 @@ describe("Single Album page", () => {
     expect(images).toHaveLength(3);
   });
 
-  it("render without data", async () => {
+  it("should show 'No data' label when album doesn't exist", async () => {
     mockAxios({}, []);
     await act(async () => {
       rerender("/albums/2");

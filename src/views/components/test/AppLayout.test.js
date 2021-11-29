@@ -3,25 +3,25 @@ import { render, screen } from "@testing-library/react";
 import AppLayout from "../AppLayout";
 
 describe("AppLayout component", () => {
-  it("render logo", () => {
+  it("should render logo", () => {
     render(<AppLayout/>);
     const logo = screen.getByText(/Logo/i);
     expect(logo).toBeInTheDocument();
   });
 
-  it("render footer copyright", () => {
+  it("should render footer copyright", () => {
     render(<AppLayout loaderVisible={false}/>);
     const copyright = screen.getByText("Ant Design ©2018 Created by Ant UED");
     expect(copyright).toBeInTheDocument();
   })
 
-  it("render component children", () => {
+  it("should render component children", () => {
     render(<AppLayout><p>{"child node"}</p></AppLayout>);
     const childNode = screen.getByText("child node");
     expect(childNode).toBeInTheDocument();
   })
 
-  it("render component with loader ", () => {
+  it("should show loadeer", () => {
     render(<AppLayout loaderVisible={true} />);
     const loader = screen.getAllByTestId("spinner");
     // TestID is placed in 2 components by Ant Design lib.
@@ -31,14 +31,14 @@ describe("AppLayout component", () => {
     expect(loader[1]).toBeInTheDocument();
   });
 
-  it("render component without loader ", () => {
+  it("should render component without loader ", () => {
     render(<AppLayout loaderVisible={false} />);
     const loader = screen.getAllByTestId("spinner");
     // Only container
     expect(loader).toHaveLength(1);
   });
 
-  it("render menu", () => {
+  it("should render navigation menu", () => {
     render(<AppLayout />);
     const menu = screen.getByRole("menu");
     const menuItems = screen.getAllByRole("menuitem");

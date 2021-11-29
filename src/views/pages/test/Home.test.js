@@ -8,18 +8,18 @@ describe("Home page", () => {
     render(<Home />);
   });
 
-  it('match snapshot', () => {
+  it('should match snapshot', () => {
     const { asFragment } = render(<Home />);
     expect(asFragment(<Home />)).toMatchSnapshot();
   });
 
-  it("render heading", () => {
+  it("should render heading", () => {
     const heading = screen.getByRole("heading");
     expect(heading).toBeInTheDocument();
     expect(heading).toHaveTextContent(/Home page/i);
   });
 
-  it("render requirements list", () => {
+  it("should render requirements list", () => {
     const list = screen.getByRole('list');
     const listItems = screen.getAllByRole('listitem');
     expect(list).toBeInTheDocument();
