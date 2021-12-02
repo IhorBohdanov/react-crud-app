@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`404 page match snapshot 1`] = `
+<DocumentFragment>
+  <p>
+    404
+  </p>
+</DocumentFragment>
+`;
+
+exports[`404 page should match snapshot 1`] = `
+<DocumentFragment>
+  <p>
+    404
+  </p>
+</DocumentFragment>
+`;

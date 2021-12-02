@@ -5,6 +5,7 @@ import AlbumItem from '../components/AlbumItem';
 export default function Albums({albums, onAlbumDelete}) {
   return (
     <div>
+      <h1>Albums page</h1>
       {
         albums.length ?
           (
