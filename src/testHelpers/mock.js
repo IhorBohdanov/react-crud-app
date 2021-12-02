@@ -40,3 +40,15 @@ export const albums = [
     userId: 2,
   },
 ];
+
+export const newAlbum = {
+  id: 3,
+  title: "Album title",
+  userId: 2,
+}
+
+export const editedAlbum = {
+  id: 1,
+  title: "Edited album title",
+  userId: 2,
+}
